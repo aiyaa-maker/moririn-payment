@@ -10,10 +10,10 @@
     
     <style>
         :root {
-            --rose-crimson: #D45B72; /* ปรับให้อ่อนนุ่มลง */
-            --soft-pink:    #F9B4CE; /* ปรับละมุนอ่อนลง */
-            --pale-pink:    #FFF0F6; /* ปรับนวลอ่อนใส */
-            --deep-brown:   #63514F; /* ปรับน้ำตาลให้อ่อนนุ่มขึ้น */
+            --rose-crimson: #D45B72;
+            --soft-pink:    #F9B4CE;
+            --pale-pink:    #FFF0F6;
+            --deep-brown:   #63514F;
         }
 
         body {
@@ -63,7 +63,6 @@
         .anim-pulse { animation: pulse-soft 3s ease-in-out infinite; }
         .anim-spin { animation: spin-slow 8s linear infinite; }
         
-        /* กระจกฝ้า นุ่มฟุ้งละมุนนัวสุดๆ */
         .glass-card {
             background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 240, 246, 0.4) 100%);
             backdrop-filter: blur(25px);
@@ -144,9 +143,9 @@
 
     <div class="max-w-[420px] w-full relative z-10 space-y-5 pb-10">
         
-        <!-- ส่วน Profile Header (อัปเดตปกหลังใหม่ + ปรับสีนุ่มละมุน) -->
+        <!-- ส่วน Profile Header -->
         <div class="glass-card rounded-[40px] p-0 text-center relative overflow-hidden flex flex-col items-center">
-            <!-- พื้นหลังครึ่งบน (Banner เปลี่ยนเป็นรูป GIF ใหม่) -->
+            <!-- พื้นหลังครึ่งบน (Banner) -->
             <div class="w-full h-36 relative overflow-hidden bg-gradient-to-r from-[#F9B4CE]/80 via-[#FFF0F6] to-[#D45B72]/40">
                 <div class="absolute inset-0 bg-cover bg-center opacity-70 mix-blend-overlay" style="background-image: url('https://i.ibb.co/NwdQZMZ/769610-AC-F98-B-4-AE6-A685-217-AF62988-B2.gif');"></div>
             </div>
@@ -156,7 +155,8 @@
                 <!-- กรอบและรูปโปรไฟล์ -->
                 <div class="relative w-32 h-32 flex items-center justify-center my-1">
                     <img src="https://i.ibb.co/990vwJbH/4558-C76-D-1723-4707-BCFB-451-D83-ADF160.gif" alt="Profile Frame" class="absolute w-[200%] h-[200%] max-w-none object-contain pointer-events-none z-20">
-                    <img src="https://i.postimg.cc/brSLzHf3/line-oa-chat-261023-095707.jpg" alt="Profile" class="w-24 h-24 rounded-full object-cover shadow-lg border-4 border-white z-10">
+                    <!-- รูปโปรไฟล์ akashi-akashi-seijuro.gif -->
+                    <img src="akashi-akashi-seijuro.gif" alt="Profile" class="w-24 h-24 rounded-full object-cover shadow-lg border-4 border-white z-10">
                 </div>
                 
                 <h1 class="text-lg font-bold text-[#63514F] mt-2 flex items-center justify-center gap-1 flex-wrap drop-shadow-sm text-center">
@@ -165,7 +165,7 @@
             </div>
         </div>
 
-        <!-- welcome โปรดอ่านก่อนชำระ (จัดข้อความกึ่งกลาง) -->
+        <!-- welcome โปรดอ่านก่อนชำระ -->
         <div class="glass-card rounded-[28px] overflow-hidden transition-all duration-300">
             <button onclick="toggleWelcome()" class="w-full p-4 flex items-center justify-center relative font-bold text-[#63514F] text-sm hover:bg-[#FFF0F6]/60 transition-colors text-center">
                 <span class="flex items-center justify-center gap-2 text-[15px] text-center w-full">
@@ -174,9 +174,11 @@
                 <span id="welcome-arrow" class="absolute right-5 text-[#D45B72] font-bold text-base transition-transform duration-300">v</span>
             </button>
             <div id="welcome-content" class="hidden px-5 pb-5 text-xs leading-relaxed text-[#63514F] space-y-2 border-t border-[#F9B4CE]/25 pt-3 text-center">
-                <p>♡ อย่าลืมแวะดูโปรโมชั่นของร้านในเว็ป จะได้ไม่พลาดสิทธิ์พิเศษนะค้าบ lovely</p>
-                <p>♡ เฟสหลัก moririn ปิดถาวรน้า ㅠ ㅠ ผู้ติดตาม10k เครดิตมากกว่า1000+</p>
-                <p>♡ ขอบคุณที่ไว้ใจและอุดหนุนร้านพิ้งนะคับ</p>
+                <p>♡ อย่าลืมแวะดูโปรโมชั่นในเว็ปร้านน้า</p>
+                <p>♥︎ จะได้ไม่พลาดสิทธิ์พิเศษค้าบ lovely</p>
+                <p>♡ เฟสหลัก moririn ปิดถาวรน้า ㅠ ㅠ</p>
+                <p>♥︎ ผู้ติดตาม10k เครดิตมากกว่า1000+</p>
+                <p>♡ ขอบคุณที่ไว้ใจและอุดหนุนร้านพิ้งคับ</p>
             </div>
         </div>
 
@@ -200,7 +202,7 @@
                 </div>
             </div>
 
-            <!-- ปุ่มบันทึกภาพ โทนชมพูอ่อนหวานละมุน -->
+            <!-- ปุ่มบันทึกภาพ -->
             <div class="px-1">
                 <button onclick="downloadQR()" class="w-full flex items-center justify-center gap-2 bg-gradient-to-r from-[#D45B72] via-[#F9B4CE] to-[#D45B72] text-white font-bold py-3.5 px-6 rounded-full shadow-md hover:opacity-95 transition-all active:scale-95 border border-white/50 text-sm">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-5 h-5 text-[#FFF0F6]">
@@ -221,7 +223,7 @@
                     </p>
                 </div>
 
-                <!-- การ์ดช่องชำระเงินใหญ่ โทนสีละมุนนวล -->
+                <!-- การ์ดช่องชำระเงินใหญ่ -->
                 <div class="space-y-4 pt-1">
                     
                     <!-- K PLUS Card -->
@@ -312,7 +314,6 @@
     </div>
 
     <script>
-        // --- Web Audio API เล่นเสียงคลิกเมาส์ทันทีเมื่อกดปุ่มบนหน้าจอ ---
         let audioCtx = null;
         function playMouseClickSound() {
             try {
@@ -346,7 +347,6 @@
             playMouseClickSound();
         });
 
-        // --- ระบบควบคุมเพลง ---
         const music = document.getElementById('bg-music');
         const iconOn = document.getElementById('music-icon-on');
         const iconOff = document.getElementById('music-icon-off');
@@ -371,7 +371,6 @@
             }
         }
 
-        // --- สลับการแสดงผลดรอปดาวน์ Welcome ---
         function toggleWelcome() {
             const content = document.getElementById('welcome-content');
             const arrow = document.getElementById('welcome-arrow');
@@ -384,7 +383,6 @@
             }
         }
 
-        // --- ระบบบันทึกรูปภาพ ---
         async function downloadQR() {
             const imgElement = document.getElementById('qr-image');
             if (!imgElement || !imgElement.src) {
@@ -424,7 +422,6 @@
             showToast('เปิดรูปภาพเรียบร้อยค่ะ');
         }
 
-        // --- ระบบคัดลอกข้อความ ---
         function copyText(text, containerElement, type, successMessage) {
             if (navigator.clipboard && navigator.clipboard.writeText) {
                 navigator.clipboard.writeText(text).then(() => {
