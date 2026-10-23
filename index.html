@@ -10,26 +10,24 @@
     
     <style>
         :root {
-            --charcoal-dark:    #3A3635;
-            --charcoal-medium:  #504C4A;
-            --charcoal-light:   #787371;
-            --soft-gray:        #E8E5E3;
-            --pale-pink:        #FBE8EF;
-            --blush-pink:       #FFF2F6;
+            --rose-crimson: #D45B72; /* ปรับให้อ่อนนุ่มลง */
+            --soft-pink:    #F9B4CE; /* ปรับละมุนอ่อนลง */
+            --pale-pink:    #FFF0F6; /* ปรับนวลอ่อนใส */
+            --deep-brown:   #63514F; /* ปรับน้ำตาลให้อ่อนนุ่มขึ้น */
         }
 
         body {
             font-family: 'Prompt', sans-serif;
             background: 
-                radial-gradient(circle at 10% 15%, var(--blush-pink) 0%, transparent 55%),
-                radial-gradient(circle at 90% 25%, #E2DFDE 0%, transparent 50%),
-                radial-gradient(circle at 50% 60%, #FAF8F7 0%, transparent 60%),
-                radial-gradient(circle at 20% 90%, var(--pale-pink) 0%, transparent 50%),
-                radial-gradient(circle at 85% 95%, #EBE7E5 0%, transparent 45%);
-            background-color: #F7F5F4;
+                radial-gradient(circle at 15% 15%, #FFF0F6 0%, transparent 60%),
+                radial-gradient(circle at 85% 25%, #F9B4CE22 0%, transparent 50%),
+                radial-gradient(circle at 50% 60%, #FFFFFF 0%, transparent 70%),
+                radial-gradient(circle at 20% 85%, #FFF0F6 0%, transparent 60%),
+                radial-gradient(circle at 80% 90%, #D45B7215 0%, transparent 50%);
+            background-color: #FCF8F9;
             background-attachment: fixed;
             min-height: 100vh;
-            color: var(--charcoal-dark);
+            color: var(--deep-brown);
         }
         
         .font-mitr, .font-mali {
@@ -45,8 +43,8 @@
             50% { transform: translateX(15px) rotate(-10deg); }
         }
         @keyframes pulse-soft {
-            0%, 100% { transform: scale(1); opacity: 0.7; }
-            50% { transform: scale(1.08); opacity: 0.95; }
+            0%, 100% { transform: scale(1); opacity: 0.6; }
+            50% { transform: scale(1.08); opacity: 0.9; }
         }
         @keyframes spin-slow { 100% { transform: rotate(360deg); } }
         
@@ -65,23 +63,23 @@
         .anim-pulse { animation: pulse-soft 3s ease-in-out infinite; }
         .anim-spin { animation: spin-slow 8s linear infinite; }
         
-        /* กระจกฝ้า นุ่มฟุ้งไล่เฉดสีเงา */
+        /* กระจกฝ้า นุ่มฟุ้งละมุนนัวสุดๆ */
         .glass-card {
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(248, 245, 244, 0.75) 100%);
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 240, 246, 0.4) 100%);
             backdrop-filter: blur(25px);
             -webkit-backdrop-filter: blur(25px);
-            border: 1px solid rgba(255, 255, 255, 0.8);
-            box-shadow: 0 20px 45px -10px rgba(58, 54, 53, 0.08),
+            border: 1.5px solid rgba(255, 255, 255, 0.95);
+            box-shadow: 0 20px 45px -10px rgba(212, 91, 114, 0.08),
                         inset 0 1px 2px rgba(255, 255, 255, 1),
-                        inset 0 -2px 6px rgba(0, 0, 0, 0.02);
+                        inset 0 -2px 6px rgba(249, 180, 206, 0.05);
         }
         .virtual-card {
-            transition: all 0.35 cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
         }
         .virtual-card:hover {
             transform: translateY(-4px);
-            box-shadow: 0 15px 35px -5px rgba(58, 54, 53, 0.12),
-                        inset 0 1px 3px rgba(255, 255, 255, 0.9);
+            box-shadow: 0 15px 35px -5px rgba(212, 91, 114, 0.12),
+                        inset 0 1px 3px rgba(255, 255, 255, 0.95);
         }
         .virtual-card:active {
             transform: translateY(2px) scale(0.98);
@@ -97,12 +95,10 @@
             theme: {
                 extend: {
                     colors: {
-                        charcoalDark: '#3A3635',
-                        charcoalMedium: '#504C4A',
-                        charcoalLight: '#787371',
-                        softGray: '#E8E5E3',
-                        palePink: '#FBE8EF',
-                        blushPink: '#FFF2F6',
+                        roseCrimson: '#D45B72',
+                        softPink: '#F9B4CE',
+                        palePink: '#FFF0F6',
+                        deepBrown: '#63514F',
                     }
                 }
             }
@@ -111,25 +107,25 @@
 </head>
 <body class="flex flex-col items-center py-6 px-4 relative overflow-x-hidden">
 
-    <!-- Elements ตกแต่งพื้นหลัง เทาเงา แซมชมพูอ่อน -->
+    <!-- Elements ตกแต่งพื้นหลัง โทนชมพูนวลละมุน -->
     <div class="fixed inset-0 pointer-events-none overflow-hidden z-0">
-        <svg class="absolute top-[5%] left-[10%] w-8 h-8 text-charcoalMedium/20 anim-float-1" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
-        <svg class="absolute top-[15%] left-[2%] w-6 h-6 text-palePink anim-pulse" fill="currentColor" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
-        <svg class="absolute top-[8%] left-[25%] w-4 h-4 text-charcoalLight/20 anim-float-3" fill="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/></svg>
-        <svg class="absolute top-[10%] right-[8%] w-10 h-10 text-palePink anim-float-2" fill="currentColor" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
-        <svg class="absolute top-[2%] right-[20%] w-5 h-5 text-softGray anim-float-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
-        <svg class="absolute top-[40%] -left-2 w-12 h-12 text-blushPink anim-pulse" fill="currentColor" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
-        <svg class="absolute top-[50%] right-[2%] w-6 h-6 text-charcoalLight/15 anim-float-1" fill="currentColor" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-        <svg class="absolute bottom-[10%] left-[10%] w-8 h-8 text-palePink anim-float-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
-        <svg class="absolute bottom-[5%] right-[15%] w-7 h-7 text-softGray anim-float-2" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
+        <svg class="absolute top-[5%] left-[10%] w-8 h-8 text-[#F9B4CE]/25 anim-float-1" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
+        <svg class="absolute top-[15%] left-[2%] w-6 h-6 text-[#D45B72]/15 anim-pulse" fill="currentColor" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+        <svg class="absolute top-[8%] left-[25%] w-4 h-4 text-[#FFF0F6] anim-float-3" fill="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/></svg>
+        <svg class="absolute top-[10%] right-[8%] w-10 h-10 text-[#F9B4CE]/30 anim-float-2" fill="currentColor" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+        <svg class="absolute top-[2%] right-[20%] w-5 h-5 text-[#FFF0F6] anim-float-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
+        <svg class="absolute top-[40%] -left-2 w-12 h-12 text-[#FFF0F6]/90 anim-pulse" fill="currentColor" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+        <svg class="absolute top-[50%] right-[2%] w-6 h-6 text-[#D45B72]/15 anim-float-1" fill="currentColor" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+        <svg class="absolute bottom-[10%] left-[10%] w-8 h-8 text-[#F9B4CE]/25 anim-float-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+        <svg class="absolute bottom-[5%] right-[15%] w-7 h-7 text-[#FFF0F6] anim-float-2" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
     </div>
 
     <!-- ปุ่มเปิด-ปิดเพลง -->
-    <button id="music-toggle" onclick="toggleMusic(event)" class="fixed bottom-6 left-6 z-50 bg-gradient-to-br from-white via-white to-softGray p-3.5 rounded-full shadow-lg border border-white/80 text-charcoalDark hover:scale-110 active:scale-95 transition-all flex items-center justify-center cursor-pointer">
-        <svg id="music-icon-on" xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 hidden anim-pulse text-charcoalDark" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+    <button id="music-toggle" onclick="toggleMusic(event)" class="fixed bottom-6 left-6 z-50 bg-gradient-to-br from-white via-[#FFF0F6] to-[#F9B4CE]/60 p-3.5 rounded-full shadow-lg border border-white/80 text-[#D45B72] hover:scale-110 active:scale-95 transition-all flex items-center justify-center cursor-pointer">
+        <svg id="music-icon-on" xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 hidden anim-pulse text-[#D45B72]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
             <path stroke-linecap="round" stroke-linejoin="round" d="M15.536 8.464a5 5 0 010 7.072M18.364 5.636a9 9 0 010 12.728M11 5L6 9H2v6h4l5 4V5z" />
         </svg>
-        <svg id="music-icon-off" xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-charcoalLight" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+        <svg id="music-icon-off" xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-[#63514F]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
             <path stroke-linecap="round" stroke-linejoin="round" d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" />
             <path stroke-linecap="round" stroke-linejoin="round" d="M17 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2" />
         </svg>
@@ -139,8 +135,8 @@
         <source src="ลงใหม่ไม่ลบละๆ55.mp3" type="audio/mpeg">
     </audio>
 
-    <div id="toast" class="fixed bottom-8 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-charcoalDark via-charcoalMedium to-charcoalDark text-white px-6 py-3 rounded-full shadow-2xl transition-all duration-300 opacity-0 translate-y-4 pointer-events-none z-50 flex items-center gap-2 font-medium text-sm border border-white/20">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-5 h-5 text-palePink">
+    <div id="toast" class="fixed bottom-8 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-[#D45B72] via-[#63514F] to-[#D45B72] text-white px-6 py-3 rounded-full shadow-2xl transition-all duration-300 opacity-0 translate-y-4 pointer-events-none z-50 flex items-center justify-center gap-2 font-medium text-sm border border-white/30 text-center">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-5 h-5 text-[#FFF0F6]">
             <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
         </svg>
         <span id="toast-text">คัดลอกแล้ว</span>
@@ -148,33 +144,39 @@
 
     <div class="max-w-[420px] w-full relative z-10 space-y-5 pb-10">
         
-        <!-- ส่วน Profile Header -->
-        <div class="glass-card rounded-[40px] p-6 text-center relative overflow-hidden">
-            <div class="absolute inset-0 bg-cover bg-center opacity-15 z-0" style="background-image: url('https://i.postimg.cc/D0452d3c/line-oa-chat-261023-095709.jpg');"></div>
-            <div class="relative z-10 flex flex-col items-center">
-                <div class="relative w-40 h-40 flex items-center justify-center my-2">
+        <!-- ส่วน Profile Header (อัปเดตปกหลังใหม่ + ปรับสีนุ่มละมุน) -->
+        <div class="glass-card rounded-[40px] p-0 text-center relative overflow-hidden flex flex-col items-center">
+            <!-- พื้นหลังครึ่งบน (Banner เปลี่ยนเป็นรูป GIF ใหม่) -->
+            <div class="w-full h-36 relative overflow-hidden bg-gradient-to-r from-[#F9B4CE]/80 via-[#FFF0F6] to-[#D45B72]/40">
+                <div class="absolute inset-0 bg-cover bg-center opacity-70 mix-blend-overlay" style="background-image: url('https://i.ibb.co/NwdQZMZ/769610-AC-F98-B-4-AE6-A685-217-AF62988-B2.gif');"></div>
+            </div>
+            
+            <!-- ส่วน Profile และ ชื่อ -->
+            <div class="relative z-10 flex flex-col items-center justify-center w-full px-6 pt-0 pb-6 -mt-16">
+                <!-- กรอบและรูปโปรไฟล์ -->
+                <div class="relative w-32 h-32 flex items-center justify-center my-1">
                     <img src="https://i.ibb.co/990vwJbH/4558-C76-D-1723-4707-BCFB-451-D83-ADF160.gif" alt="Profile Frame" class="absolute w-[200%] h-[200%] max-w-none object-contain pointer-events-none z-20">
-                    <img src="https://i.postimg.cc/brSLzHf3/line-oa-chat-261023-095707.jpg" alt="Profile" class="w-24 h-24 rounded-full object-cover shadow-md border-2 border-white z-10">
+                    <img src="https://i.postimg.cc/brSLzHf3/line-oa-chat-261023-095707.jpg" alt="Profile" class="w-24 h-24 rounded-full object-cover shadow-lg border-4 border-white z-10">
                 </div>
                 
-                <h1 class="text-lg font-bold text-charcoalDark mt-3 flex items-center justify-center gap-1 flex-wrap drop-shadow-sm">
-                    ✿ ᩧ ᩧᧆ 𓈒 天使 pay 𝗠𝗼𝗿𝗶𝗿𝗶𝗻 𓈒 🧁
+                <h1 class="text-lg font-bold text-[#63514F] mt-2 flex items-center justify-center gap-1 flex-wrap drop-shadow-sm text-center">
+                    🍮 Moririn pay ૮ ྀིᴗ͈ . ᴗ͈ ྀིa
                 </h1>
             </div>
         </div>
 
-        <!-- welcome โปรดอ่านก่อนชำระ -->
+        <!-- welcome โปรดอ่านก่อนชำระ (จัดข้อความกึ่งกลาง) -->
         <div class="glass-card rounded-[28px] overflow-hidden transition-all duration-300">
-            <button onclick="toggleWelcome()" class="w-full p-4 flex items-center justify-between font-bold text-charcoalDark text-sm hover:bg-palePink/30 transition-colors">
-                <span class="flex items-center gap-2 text-[15px]">
-                    welcome โปรดอ่านก่อนชำระ
+            <button onclick="toggleWelcome()" class="w-full p-4 flex items-center justify-center relative font-bold text-[#63514F] text-sm hover:bg-[#FFF0F6]/60 transition-colors text-center">
+                <span class="flex items-center justify-center gap-2 text-[15px] text-center w-full">
+                    welcome โปรดอ่านก่อนชำระ ୨ৎ
                 </span>
-                <span id="welcome-arrow" class="text-charcoalDark font-bold text-base transition-transform duration-300">v</span>
+                <span id="welcome-arrow" class="absolute right-5 text-[#D45B72] font-bold text-base transition-transform duration-300">v</span>
             </button>
-            <div id="welcome-content" class="hidden px-5 pb-5 text-xs leading-relaxed text-charcoalMedium space-y-2 border-t border-charcoalLight/10 pt-3">
-                <p>• อย่าลืมแวะดูโปรโมชั่นของร้านในเว็ป จะได้ไม่พลาดสิทธิ์พิเศษนะค้าบ lovely</p>
-                <p>• เฟสหลักmoririnปิดถาวร ผู้ติดตาม10k เครดิตมากกว่า1000+ ปลอดภัย100%</p>
-                <p>• ขอบคุณที่ไว้ใจและอุดหนุนร้านพิ้งนะคับ</p>
+            <div id="welcome-content" class="hidden px-5 pb-5 text-xs leading-relaxed text-[#63514F] space-y-2 border-t border-[#F9B4CE]/25 pt-3 text-center">
+                <p>♡ อย่าลืมแวะดูโปรโมชั่นของร้านในเว็ป จะได้ไม่พลาดสิทธิ์พิเศษนะค้าบ lovely</p>
+                <p>♡ เฟสหลัก moririn ปิดถาวรน้า ㅠ ㅠ ผู้ติดตาม10k เครดิตมากกว่า1000+</p>
+                <p>♡ ขอบคุณที่ไว้ใจและอุดหนุนร้านพิ้งนะคับ</p>
             </div>
         </div>
 
@@ -185,9 +187,9 @@
                 <svg class="absolute inset-0 w-full h-full pointer-events-none" xmlns="http://www.w3.org/2000/svg">
                     <defs>
                         <linearGradient id="borderGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                            <stop offset="0%" stop-color="#504C4A" />
-                            <stop offset="50%" stop-color="#FBE8EF" />
-                            <stop offset="100%" stop-color="#787371" />
+                            <stop offset="0%" stop-color="#D45B72" />
+                            <stop offset="50%" stop-color="#FFF0F6" />
+                            <stop offset="100%" stop-color="#F9B4CE" />
                         </linearGradient>
                     </defs>
                     <rect x="2" y="2" width="calc(100% - 4px)" height="calc(100% - 4px)" rx="34" fill="none" stroke="url(#borderGradient)" stroke-width="3" stroke-linecap="round" class="animate-dash" />
@@ -198,10 +200,10 @@
                 </div>
             </div>
 
-            <!-- ปุ่มบันทึกภาพ ไล่สีเทาเงาพรีเมียม -->
+            <!-- ปุ่มบันทึกภาพ โทนชมพูอ่อนหวานละมุน -->
             <div class="px-1">
-                <button onclick="downloadQR()" class="w-full flex items-center justify-center gap-2 bg-gradient-to-r from-charcoalMedium via-charcoalDark to-charcoalMedium text-white font-bold py-3.5 px-6 rounded-full shadow-md hover:opacity-95 transition-all active:scale-95 border border-white/30 text-sm">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-5 h-5 text-palePink">
+                <button onclick="downloadQR()" class="w-full flex items-center justify-center gap-2 bg-gradient-to-r from-[#D45B72] via-[#F9B4CE] to-[#D45B72] text-white font-bold py-3.5 px-6 rounded-full shadow-md hover:opacity-95 transition-all active:scale-95 border border-white/50 text-sm">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-5 h-5 text-[#FFF0F6]">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5M16.5 12 12 16.5m0 0L7.5 12m4.5 4.5V3" />
                     </svg>
                     บันทึกแล้วสแกนได้เลยนะคะ
@@ -211,55 +213,55 @@
             <div class="px-1 space-y-4">
                 
                 <div class="text-center space-y-2">
-                    <p class="text-xs font-medium text-charcoalLight">
+                    <p class="text-xs font-medium text-[#63514F]/75">
                         เซฟรูปเพื่อสแกน หรือจิ้มคัดลอกเลขบัญชีได้เลยนะคะ
                     </p>
-                    <p class="text-sm font-semibold text-charcoalDark">
-                        ชื่อบัญชี <span class="text-charcoalDark font-bold bg-gradient-to-r from-palePink to-blushPink px-3 py-1 rounded-lg border border-charcoalLight/15 shadow-sm">ภัทรสุดา ป.</span> เท่านั้น
+                    <p class="text-sm font-semibold text-[#63514F]">
+                        ชื่อบัญชี <span class="text-[#D45B72] font-bold bg-gradient-to-r from-[#FFF0F6] to-[#F9B4CE]/25 px-3 py-1 rounded-lg border border-[#F9B4CE]/30 shadow-sm">ภัทรสุดา ป.</span> เท่านั้น
                     </p>
                 </div>
 
-                <!-- การ์ดช่องชำระเงินใหญ่ ไล่ระดับเทาเงาอมชมพูนวล -->
+                <!-- การ์ดช่องชำระเงินใหญ่ โทนสีละมุนนวล -->
                 <div class="space-y-4 pt-1">
                     
                     <!-- K PLUS Card -->
-                    <div class="virtual-card relative bg-gradient-to-br from-white via-[#F2EFEE] to-palePink/40 rounded-[24px] p-5 shadow-sm shadow-charcoalDark/5 overflow-hidden cursor-pointer border border-white" onclick="copyText('1501131772', this, 'kplus', 'คัดลอกเลขบัญชี K PLUS แล้ว')">
-                        <svg class="absolute -right-6 -bottom-6 w-32 h-32 text-charcoalDark opacity-5 transform -rotate-12 pointer-events-none" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
+                    <div class="virtual-card relative bg-gradient-to-br from-white via-[#FFF0F6]/60 to-[#F9B4CE]/20 rounded-[24px] p-5 shadow-sm shadow-[#D45B72]/5 overflow-hidden cursor-pointer border border-white" onclick="copyText('1501131772', this, 'kplus', 'คัดลอกเลขบัญชี K PLUS แล้ว')">
+                        <svg class="absolute -right-6 -bottom-6 w-32 h-32 text-[#D45B72] opacity-5 transform -rotate-12 pointer-events-none" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
                         
                         <div class="relative z-10 flex flex-col gap-4">
                             <div class="flex justify-between items-center">
-                                <div class="bg-white/80 backdrop-blur-sm px-3.5 py-1.5 rounded-full border border-charcoalLight/15 shadow-sm">
-                                    <span class="text-charcoalDark font-bold text-xs tracking-wider">k plus</span>
+                                <div class="bg-white/90 backdrop-blur-sm px-3.5 py-1.5 rounded-full border border-[#F9B4CE]/25 shadow-sm">
+                                    <span class="text-[#D45B72] font-bold text-xs tracking-wider">k plus</span>
                                 </div>
-                                <button class="kplus-btn bg-gradient-to-r from-charcoalMedium to-charcoalDark text-white text-[12px] font-bold px-4 py-2 rounded-full flex items-center gap-1.5 shadow-sm pointer-events-none border border-white/20">
+                                <button class="kplus-btn bg-gradient-to-r from-[#D45B72] to-[#63514F] text-white text-[12px] font-bold px-4 py-2 rounded-full flex items-center gap-1.5 shadow-sm pointer-events-none border border-white/20">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
                                     คัดลอก
                                 </button>
                             </div>
                             <div class="mt-1">
-                                <div class="text-charcoalMedium text-[11px] font-bold mb-1">กสิกรไทย ( ภัทรสุดา ป. )</div>
-                                <div class="text-charcoalDark font-bold text-[22px] tracking-widest leading-none drop-shadow-sm">150-1-13177-2</div>
+                                <div class="text-[#63514F] text-[11px] font-bold mb-1">กสิกรไทย ( ภัทรสุดา ป. )</div>
+                                <div class="text-[#D45B72] font-bold text-[22px] tracking-widest leading-none drop-shadow-sm">150-1-13177-2</div>
                             </div>
                         </div>
                     </div>
 
                     <!-- TrueMoney Wallet Card -->
-                    <div class="virtual-card relative bg-gradient-to-br from-palePink/45 via-white to-[#F2EFEE] rounded-[24px] p-5 shadow-sm shadow-charcoalDark/5 overflow-hidden cursor-pointer border border-white" onclick="copyText('0973405857', this, 'true', 'คัดลอกเบอร์ TrueMoney Wallet แล้ว')">
-                        <svg class="absolute -left-6 -top-6 w-32 h-32 text-charcoalDark opacity-5 transform rotate-12 pointer-events-none" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
+                    <div class="virtual-card relative bg-gradient-to-br from-[#FFF0F6]/80 via-white to-[#F9B4CE]/15 rounded-[24px] p-5 shadow-sm shadow-[#D45B72]/5 overflow-hidden cursor-pointer border border-white" onclick="copyText('0973405857', this, 'true', 'คัดลอกเบอร์ TrueMoney Wallet แล้ว')">
+                        <svg class="absolute -left-6 -top-6 w-32 h-32 text-[#D45B72] opacity-5 transform rotate-12 pointer-events-none" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
                         
                         <div class="relative z-10 flex flex-col gap-4">
                             <div class="flex justify-between items-center">
-                                <div class="bg-white/80 backdrop-blur-sm px-3.5 py-1.5 rounded-full border border-charcoalLight/15 shadow-sm">
-                                    <span class="text-charcoalDark font-bold text-xs tracking-wider">wallet</span>
+                                <div class="bg-white/90 backdrop-blur-sm px-3.5 py-1.5 rounded-full border border-[#F9B4CE]/25 shadow-sm">
+                                    <span class="text-[#D45B72] font-bold text-xs tracking-wider">wallet</span>
                                 </div>
-                                <button class="true-btn bg-gradient-to-r from-charcoalMedium to-charcoalDark text-white text-[12px] font-bold px-4 py-2 rounded-full flex items-center gap-1.5 shadow-sm pointer-events-none border border-white/20">
+                                <button class="true-btn bg-gradient-to-r from-[#D45B72] to-[#63514F] text-white text-[12px] font-bold px-4 py-2 rounded-full flex items-center gap-1.5 shadow-sm pointer-events-none border border-white/20">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
                                     คัดลอก
                                 </button>
                             </div>
                             <div class="mt-1">
-                                <div class="text-charcoalMedium text-[11px] font-bold mb-1">ทรูวอเลท ( ภัทรสุดา ป. )</div>
-                                <div class="text-charcoalDark font-bold text-[22px] tracking-widest leading-none drop-shadow-sm">097-340-5857</div>
+                                <div class="text-[#63514F] text-[11px] font-bold mb-1">ทรูวอเลท ( ภัทรสุดา ป. )</div>
+                                <div class="text-[#D45B72] font-bold text-[22px] tracking-widest leading-none drop-shadow-sm">097-340-5857</div>
                             </div>
                         </div>
                     </div>
@@ -267,36 +269,36 @@
                 </div>
 
                 <!-- ช่องโน๊ตสลิป -->
-                <div class="relative bg-gradient-to-br from-blushPink via-white to-softGray/30 rounded-[20px] p-4 border-2 border-dashed border-charcoalLight/30 shadow-sm overflow-hidden mt-3">
+                <div class="relative bg-gradient-to-br from-[#FFF0F6] via-white to-[#F9B4CE]/15 rounded-[20px] p-4 border-2 border-dashed border-[#F9B4CE]/50 shadow-sm overflow-hidden mt-3">
                     <div class="flex items-start gap-3 relative z-10">
-                        <div class="bg-gradient-to-br from-charcoalMedium to-charcoalDark p-1.5 rounded-full shadow-sm text-white flex-shrink-0 mt-0.5">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-4 h-4 text-palePink">
+                        <div class="bg-gradient-to-br from-[#D45B72] to-[#63514F] p-1.5 rounded-full shadow-sm text-white flex-shrink-0 mt-0.5">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-4 h-4 text-[#FFF0F6]">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
                             </svg>
                         </div>
-                        <div class="text-xs text-charcoalDark leading-relaxed text-left flex-1">
-                            <span class="font-bold text-charcoalDark text-sm block mb-1">โน๊ตสลิปทุกครั้ง</span>
-                            <div class="fb-copy-btn inline-flex items-center gap-1.5 bg-white border border-charcoalLight/20 px-3 py-1.5 rounded-xl cursor-pointer shadow-sm hover:bg-palePink/40 transition-all active:scale-95 my-1" onclick="copyText('ยินยอมโอนให้ Line : moojiw', this, 'note', 'คัดลอกข้อความกำกับสลิปแล้ว')">
-                                <span class="font-bold text-charcoalDark text-[12px]">ยินยอมโอนให้ Line : moojiw</span>
-                                <span class="note-icon-status text-charcoalMedium">
+                        <div class="text-xs text-[#63514F] leading-relaxed text-left flex-1">
+                            <span class="font-bold text-[#D45B72] text-sm block mb-1">โน๊ตสลิปทุกครั้ง</span>
+                            <div class="fb-copy-btn inline-flex items-center gap-1.5 bg-white border border-[#F9B4CE]/30 px-3 py-1.5 rounded-xl cursor-pointer shadow-sm hover:bg-[#FFF0F6] transition-all active:scale-95 my-1" onclick="copyText('ยินยอมโอนให้ Line : moojiw', this, 'note', 'คัดลอกข้อความกำกับสลิปแล้ว')">
+                                <span class="font-bold text-[#63514F] text-[12px]">ยินยอมโอนให้ Line : moojiw</span>
+                                <span class="note-icon-status text-[#D45B72]">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
                                 </span>
                             </div>
-                            <p class="text-charcoalMedium text-[11px] mt-1">รบกวนโน๊ตสลิปที่ส่งให้ด้วยน้า ♡</p>
+                            <p class="text-[#63514F]/75 text-[11px] mt-1">รบกวนโน๊ตสลิปที่ส่งให้ด้วยน้า ♡</p>
                         </div>
                     </div>
                 </div>
 
                 <!-- คำเตือนเรื่องโอนเงิน -->
-                <div class="bg-gradient-to-r from-white via-white to-palePink/30 border border-charcoalLight/15 rounded-2xl p-3.5 flex items-start gap-3 text-left shadow-sm">
-                    <div class="bg-palePink p-1.5 rounded-full text-charcoalDark flex-shrink-0 mt-0.5 shadow-sm">
+                <div class="bg-gradient-to-r from-white via-[#FFF0F6]/40 to-white border border-[#F9B4CE]/25 rounded-2xl p-3.5 flex items-start gap-3 text-left shadow-sm">
+                    <div class="bg-[#FFF0F6] p-1.5 rounded-full text-[#D45B72] flex-shrink-0 mt-0.5 shadow-sm">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-4 h-4">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z" />
                         </svg>
                     </div>
-                    <div class="text-[12px] leading-relaxed text-charcoalDark">
-                        <p class="font-bold text-charcoalDark text-[13px]">♡ เช็คชื่อก่อนกดโอนทุกรอบ</p>
-                        <p class="text-charcoalMedium text-[11.5px]">โอนผิดไม่รับผิดชอบทุกกรณีน้า</p>
+                    <div class="text-[12px] leading-relaxed text-[#63514F]">
+                        <p class="font-bold text-[#D45B72] text-[13px]">♡ เช็คชื่อก่อนกดโอนทุกรอบ</p>
+                        <p class="text-[#63514F]/75 text-[11.5px]">โอนผิดไม่รับผิดชอบทุกกรณีน้า</p>
                     </div>
                 </div>
 
@@ -304,7 +306,7 @@
         </div>
 
         <!-- ท้ายหน้า -->
-        <div class="text-center flex flex-col items-center justify-center gap-1 text-xs text-charcoalMedium pt-2 relative z-10">
+        <div class="text-center flex flex-col items-center justify-center gap-1 text-xs text-[#63514F]/65 pt-2 relative z-10">
             <p>thanks for ordering na ka 🪽</p>
         </div>
     </div>
@@ -458,7 +460,7 @@
             
             if (type === 'note') {
                 const iconContainer = containerElement.querySelector('.note-icon-status');
-                iconContainer.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="#3A3635" class="w-3.5 h-3.5"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>`;
+                iconContainer.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="#D45B72" class="w-3.5 h-3.5"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>`;
                 setTimeout(() => {
                     iconContainer.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>`;
                 }, 2000);
