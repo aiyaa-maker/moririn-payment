@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>天使 pay Moririn</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --charcoal-dark:    #3A3635;
+            --charcoal-medium:  #504C4A;
+            --charcoal-light:   #787371;
+            --soft-gray:        #E8E5E3;
+            --pale-pink:        #FBE8EF;
+            --blush-pink:       #FFF2F6;
+        }
+
+        body {
+            font-family: 'Prompt', sans-serif;
+            background: 
+                radial-gradient(circle at 10% 15%, var(--blush-pink) 0%, transparent 55%),
+                radial-gradient(circle at 90% 25%, #E2DFDE 0%, transparent 50%),
+                radial-gradient(circle at 50% 60%, #FAF8F7 0%, transparent 60%),
+                radial-gradient(circle at 20% 90%, var(--pale-pink) 0%, transparent 50%),
+                radial-gradient(circle at 85% 95%, #EBE7E5 0%, transparent 45%);
+            background-color: #F7F5F4;
+            background-attachment: fixed;
+            min-height: 100vh;
+            color: var(--charcoal-dark);
+        }
+        
+        .font-mitr, .font-mali {
+            font-family: 'Prompt', sans-serif;
+        }
+        
+        @keyframes float-up-down {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-15px) rotate(10deg); }
+        }
+        @keyframes float-left-right {
+            0%, 100% { transform: translateX(0px) rotate(0deg); }
+            50% { transform: translateX(15px) rotate(-10deg); }
+        }
+        @keyframes pulse-soft {
+            0%, 100% { transform: scale(1); opacity: 0.7; }
+            50% { transform: scale(1.08); opacity: 0.95; }
+        }
+        @keyframes spin-slow { 100% { transform: rotate(360deg); } }
+        
+        @keyframes dash-animation {
+            from { stroke-dashoffset: 24; }
+            to { stroke-dashoffset: 0; }
+        }
+        .animate-dash {
+            stroke-dasharray: 12 12;
+            animation: dash-animation 1s linear infinite;
+        }
+        .anim-float-1 { animation: float-up-down 4s ease-in-out infinite; }
+        .anim-float-2 { animation: float-up-down 5s ease-in-out infinite 1.5s; }
+        .anim-float-3 { animation: float-left-right 6s ease-in-out infinite; }
+        .anim-float-4 { animation: float-left-right 4.5s ease-in-out infinite 2s; }
+        .anim-pulse { animation: pulse-soft 3s ease-in-out infinite; }
+        .anim-spin { animation: spin-slow 8s linear infinite; }
+        
+        /* กระจกฝ้า นุ่มฟุ้งไล่เฉดสีเงา */
+        .glass-card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(248, 245, 244, 0.75) 100%);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            box-shadow: 0 20px 45px -10px rgba(58, 54, 53, 0.08),
+                        inset 0 1px 2px rgba(255, 255, 255, 1),
+                        inset 0 -2px 6px rgba(0, 0, 0, 0.02);
+        }
+        .virtual-card {
+            transition: all 0.35 cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .virtual-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 15px 35px -5px rgba(58, 54, 53, 0.12),
+                        inset 0 1px 3px rgba(255, 255, 255, 0.9);
+        }
+        .virtual-card:active {
+            transform: translateY(2px) scale(0.98);
+        }
+        
+        ::-webkit-scrollbar {
+            width: 0px;
+        }
+    </style>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        charcoalDark: '#3A3635',
+                        charcoalMedium: '#504C4A',
+                        charcoalLight: '#787371',
+                        softGray: '#E8E5E3',
+                        palePink: '#FBE8EF',
+                        blushPink: '#FFF2F6',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="flex flex-col items-center py-6 px-4 relative overflow-x-hidden">
+
+    <!-- Elements ตกแต่งพื้นหลัง เทาเงา แซมชมพูอ่อน -->
+    <div class="fixed inset-0 pointer-events-none overflow-hidden z-0">
+        <svg class="absolute top-[5%] left-[10%] w-8 h-8 text-charcoalMedium/20 anim-float-1" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
+        <svg class="absolute top-[15%] left-[2%] w-6 h-6 text-palePink anim-pulse" fill="currentColor" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+        <svg class="absolute top-[8%] left-[25%] w-4 h-4 text-charcoalLight/20 anim-float-3" fill="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/></svg>
+        <svg class="absolute top-[10%] right-[8%] w-10 h-10 text-palePink anim-float-2" fill="currentColor" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+        <svg class="absolute top-[2%] right-[20%] w-5 h-5 text-softGray anim-float-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
+        <svg class="absolute top-[40%] -left-2 w-12 h-12 text-blushPink anim-pulse" fill="currentColor" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+        <svg class="absolute top-[50%] right-[2%] w-6 h-6 text-charcoalLight/15 anim-float-1" fill="currentColor" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+        <svg class="absolute bottom-[10%] left-[10%] w-8 h-8 text-palePink anim-float-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+        <svg class="absolute bottom-[5%] right-[15%] w-7 h-7 text-softGray anim-float-2" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
+    </div>
+
+    <!-- ปุ่มเปิด-ปิดเพลง -->
+    <button id="music-toggle" onclick="toggleMusic(event)" class="fixed bottom-6 left-6 z-50 bg-gradient-to-br from-white via-white to-softGray p-3.5 rounded-full shadow-lg border border-white/80 text-charcoalDark hover:scale-110 active:scale-95 transition-all flex items-center justify-center cursor-pointer">
+        <svg id="music-icon-on" xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 hidden anim-pulse text-charcoalDark" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M15.536 8.464a5 5 0 010 7.072M18.364 5.636a9 9 0 010 12.728M11 5L6 9H2v6h4l5 4V5z" />
+        </svg>
+        <svg id="music-icon-off" xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-charcoalLight" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" />
+            <path stroke-linecap="round" stroke-linejoin="round" d="M17 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2" />
+        </svg>
+    </button>
+
+    <audio id="bg-music" loop preload="auto">
+        <source src="ลงใหม่ไม่ลบละๆ55.mp3" type="audio/mpeg">
+    </audio>
+
+    <div id="toast" class="fixed bottom-8 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-charcoalDark via-charcoalMedium to-charcoalDark text-white px-6 py-3 rounded-full shadow-2xl transition-all duration-300 opacity-0 translate-y-4 pointer-events-none z-50 flex items-center gap-2 font-medium text-sm border border-white/20">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-5 h-5 text-palePink">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+        <span id="toast-text">คัดลอกแล้ว</span>
+    </div>
+
+    <div class="max-w-[420px] w-full relative z-10 space-y-5 pb-10">
+        
+        <!-- ส่วน Profile Header -->
+        <div class="glass-card rounded-[40px] p-6 text-center relative overflow-hidden">
+            <div class="absolute inset-0 bg-cover bg-center opacity-15 z-0" style="background-image: url('https://i.postimg.cc/D0452d3c/line-oa-chat-261023-095709.jpg');"></div>
+            <div class="relative z-10 flex flex-col items-center">
+                <div class="relative w-40 h-40 flex items-center justify-center my-2">
+                    <img src="https://i.ibb.co/990vwJbH/4558-C76-D-1723-4707-BCFB-451-D83-ADF160.gif" alt="Profile Frame" class="absolute w-[200%] h-[200%] max-w-none object-contain pointer-events-none z-20">
+                    <img src="https://i.postimg.cc/brSLzHf3/line-oa-chat-261023-095707.jpg" alt="Profile" class="w-24 h-24 rounded-full object-cover shadow-md border-2 border-white z-10">
+                </div>
+                
+                <h1 class="text-lg font-bold text-charcoalDark mt-3 flex items-center justify-center gap-1 flex-wrap drop-shadow-sm">
+                    ✿ ᩧ ᩧᧆ 𓈒 天使 pay 𝗠𝗼𝗿𝗶𝗿𝗶𝗻 𓈒 🧁
+                </h1>
+            </div>
+        </div>
+
+        <!-- welcome โปรดอ่านก่อนชำระ -->
+        <div class="glass-card rounded-[28px] overflow-hidden transition-all duration-300">
+            <button onclick="toggleWelcome()" class="w-full p-4 flex items-center justify-between font-bold text-charcoalDark text-sm hover:bg-palePink/30 transition-colors">
+                <span class="flex items-center gap-2 text-[15px]">
+                    welcome โปรดอ่านก่อนชำระ
+                </span>
+                <span id="welcome-arrow" class="text-charcoalDark font-bold text-base transition-transform duration-300">v</span>
+            </button>
+            <div id="welcome-content" class="hidden px-5 pb-5 text-xs leading-relaxed text-charcoalMedium space-y-2 border-t border-charcoalLight/10 pt-3">
+                <p>• อย่าลืมแวะดูโปรโมชั่นของร้านในเว็ป จะได้ไม่พลาดสิทธิ์พิเศษนะค้าบ lovely</p>
+                <p>• เฟสหลักmoririnปิดถาวร ผู้ติดตาม10k เครดิตมากกว่า1000+ ปลอดภัย100%</p>
+                <p>• ขอบคุณที่ไว้ใจและอุดหนุนร้านพิ้งนะคับ</p>
+            </div>
+        </div>
+
+        <!-- บัตรหลักการชำระเงิน -->
+        <div class="glass-card rounded-[40px] p-5 relative z-10 space-y-5">
+            
+            <div class="relative p-2.5 rounded-[36px] z-10">
+                <svg class="absolute inset-0 w-full h-full pointer-events-none" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <linearGradient id="borderGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stop-color="#504C4A" />
+                            <stop offset="50%" stop-color="#FBE8EF" />
+                            <stop offset="100%" stop-color="#787371" />
+                        </linearGradient>
+                    </defs>
+                    <rect x="2" y="2" width="calc(100% - 4px)" height="calc(100% - 4px)" rx="34" fill="none" stroke="url(#borderGradient)" stroke-width="3" stroke-linecap="round" class="animate-dash" />
+                </svg>
+                <!-- ภาพบัญชีหลัก -->
+                <div class="rounded-[28px] overflow-hidden relative shadow-sm border-[4px] border-white bg-white">
+                    <img id="qr-image" src="793255.jpg" onerror="this.onerror=null; this.src='https://i.postimg.cc/3NhCTM9J/line-oa-chat-261023-095658.jpg';" alt="บัญชี Moririn" class="w-full h-auto object-cover min-h-[220px]">
+                </div>
+            </div>
+
+            <!-- ปุ่มบันทึกภาพ ไล่สีเทาเงาพรีเมียม -->
+            <div class="px-1">
+                <button onclick="downloadQR()" class="w-full flex items-center justify-center gap-2 bg-gradient-to-r from-charcoalMedium via-charcoalDark to-charcoalMedium text-white font-bold py-3.5 px-6 rounded-full shadow-md hover:opacity-95 transition-all active:scale-95 border border-white/30 text-sm">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-5 h-5 text-palePink">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5M16.5 12 12 16.5m0 0L7.5 12m4.5 4.5V3" />
+                    </svg>
+                    บันทึกแล้วสแกนได้เลยนะคะ
+                </button>
+            </div>
+
+            <div class="px-1 space-y-4">
+                
+                <div class="text-center space-y-2">
+                    <p class="text-xs font-medium text-charcoalLight">
+                        เซฟรูปเพื่อสแกน หรือจิ้มคัดลอกเลขบัญชีได้เลยนะคะ
+                    </p>
+                    <p class="text-sm font-semibold text-charcoalDark">
+                        ชื่อบัญชี <span class="text-charcoalDark font-bold bg-gradient-to-r from-palePink to-blushPink px-3 py-1 rounded-lg border border-charcoalLight/15 shadow-sm">ภัทรสุดา ป.</span> เท่านั้น
+                    </p>
+                </div>
+
+                <!-- การ์ดช่องชำระเงินใหญ่ ไล่ระดับเทาเงาอมชมพูนวล -->
+                <div class="space-y-4 pt-1">
+                    
+                    <!-- K PLUS Card -->
+                    <div class="virtual-card relative bg-gradient-to-br from-white via-[#F2EFEE] to-palePink/40 rounded-[24px] p-5 shadow-sm shadow-charcoalDark/5 overflow-hidden cursor-pointer border border-white" onclick="copyText('1501131772', this, 'kplus', 'คัดลอกเลขบัญชี K PLUS แล้ว')">
+                        <svg class="absolute -right-6 -bottom-6 w-32 h-32 text-charcoalDark opacity-5 transform -rotate-12 pointer-events-none" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
+                        
+                        <div class="relative z-10 flex flex-col gap-4">
+                            <div class="flex justify-between items-center">
+                                <div class="bg-white/80 backdrop-blur-sm px-3.5 py-1.5 rounded-full border border-charcoalLight/15 shadow-sm">
+                                    <span class="text-charcoalDark font-bold text-xs tracking-wider">k plus</span>
+                                </div>
+                                <button class="kplus-btn bg-gradient-to-r from-charcoalMedium to-charcoalDark text-white text-[12px] font-bold px-4 py-2 rounded-full flex items-center gap-1.5 shadow-sm pointer-events-none border border-white/20">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+                                    คัดลอก
+                                </button>
+                            </div>
+                            <div class="mt-1">
+                                <div class="text-charcoalMedium text-[11px] font-bold mb-1">กสิกรไทย ( ภัทรสุดา ป. )</div>
+                                <div class="text-charcoalDark font-bold text-[22px] tracking-widest leading-none drop-shadow-sm">150-1-13177-2</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- TrueMoney Wallet Card -->
+                    <div class="virtual-card relative bg-gradient-to-br from-palePink/45 via-white to-[#F2EFEE] rounded-[24px] p-5 shadow-sm shadow-charcoalDark/5 overflow-hidden cursor-pointer border border-white" onclick="copyText('0973405857', this, 'true', 'คัดลอกเบอร์ TrueMoney Wallet แล้ว')">
+                        <svg class="absolute -left-6 -top-6 w-32 h-32 text-charcoalDark opacity-5 transform rotate-12 pointer-events-none" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
+                        
+                        <div class="relative z-10 flex flex-col gap-4">
+                            <div class="flex justify-between items-center">
+                                <div class="bg-white/80 backdrop-blur-sm px-3.5 py-1.5 rounded-full border border-charcoalLight/15 shadow-sm">
+                                    <span class="text-charcoalDark font-bold text-xs tracking-wider">wallet</span>
+                                </div>
+                                <button class="true-btn bg-gradient-to-r from-charcoalMedium to-charcoalDark text-white text-[12px] font-bold px-4 py-2 rounded-full flex items-center gap-1.5 shadow-sm pointer-events-none border border-white/20">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+                                    คัดลอก
+                                </button>
+                            </div>
+                            <div class="mt-1">
+                                <div class="text-charcoalMedium text-[11px] font-bold mb-1">ทรูวอเลท ( ภัทรสุดา ป. )</div>
+                                <div class="text-charcoalDark font-bold text-[22px] tracking-widest leading-none drop-shadow-sm">097-340-5857</div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- ช่องโน๊ตสลิป -->
+                <div class="relative bg-gradient-to-br from-blushPink via-white to-softGray/30 rounded-[20px] p-4 border-2 border-dashed border-charcoalLight/30 shadow-sm overflow-hidden mt-3">
+                    <div class="flex items-start gap-3 relative z-10">
+                        <div class="bg-gradient-to-br from-charcoalMedium to-charcoalDark p-1.5 rounded-full shadow-sm text-white flex-shrink-0 mt-0.5">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-4 h-4 text-palePink">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
+                            </svg>
+                        </div>
+                        <div class="text-xs text-charcoalDark leading-relaxed text-left flex-1">
+                            <span class="font-bold text-charcoalDark text-sm block mb-1">โน๊ตสลิปทุกครั้ง</span>
+                            <div class="fb-copy-btn inline-flex items-center gap-1.5 bg-white border border-charcoalLight/20 px-3 py-1.5 rounded-xl cursor-pointer shadow-sm hover:bg-palePink/40 transition-all active:scale-95 my-1" onclick="copyText('ยินยอมโอนให้ Line : moojiw', this, 'note', 'คัดลอกข้อความกำกับสลิปแล้ว')">
+                                <span class="font-bold text-charcoalDark text-[12px]">ยินยอมโอนให้ Line : moojiw</span>
+                                <span class="note-icon-status text-charcoalMedium">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+                                </span>
+                            </div>
+                            <p class="text-charcoalMedium text-[11px] mt-1">รบกวนโน๊ตสลิปที่ส่งให้ด้วยน้า ♡</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- คำเตือนเรื่องโอนเงิน -->
+                <div class="bg-gradient-to-r from-white via-white to-palePink/30 border border-charcoalLight/15 rounded-2xl p-3.5 flex items-start gap-3 text-left shadow-sm">
+                    <div class="bg-palePink p-1.5 rounded-full text-charcoalDark flex-shrink-0 mt-0.5 shadow-sm">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-4 h-4">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z" />
+                        </svg>
+                    </div>
+                    <div class="text-[12px] leading-relaxed text-charcoalDark">
+                        <p class="font-bold text-charcoalDark text-[13px]">♡ เช็คชื่อก่อนกดโอนทุกรอบ</p>
+                        <p class="text-charcoalMedium text-[11.5px]">โอนผิดไม่รับผิดชอบทุกกรณีน้า</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- ท้ายหน้า -->
+        <div class="text-center flex flex-col items-center justify-center gap-1 text-xs text-charcoalMedium pt-2 relative z-10">
+            <p>thanks for ordering na ka 🪽</p>
+        </div>
+    </div>
+
+    <script>
+        // --- Web Audio API เล่นเสียงคลิกเมาส์ทันทีเมื่อกดปุ่มบนหน้าจอ ---
+        let audioCtx = null;
+        function playMouseClickSound() {
+            try {
+                if (!audioCtx) {
+                    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                }
+                if (audioCtx.state === 'suspended') {
+                    audioCtx.resume();
+                }
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(800, audioCtx.currentTime);
+                osc.frequency.exponentialRampToValueAtTime(200, audioCtx.currentTime + 0.04);
+                
+                gain.gain.setValueAtTime(0.12, audioCtx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.04);
+                
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+                
+                osc.start();
+                osc.stop(audioCtx.currentTime + 0.04);
+            } catch(e) {
+                console.log(e);
+            }
+        }
+
+        document.addEventListener('click', (e) => {
+            playMouseClickSound();
+        });
+
+        // --- ระบบควบคุมเพลง ---
+        const music = document.getElementById('bg-music');
+        const iconOn = document.getElementById('music-icon-on');
+        const iconOff = document.getElementById('music-icon-off');
+
+        function toggleMusic(event) {
+            if (event) event.stopPropagation();
+            if (music.paused) {
+                music.play().then(() => updateMusicUI(true)).catch(err => console.log('Playback error:', err));
+            } else {
+                music.pause();
+                updateMusicUI(false);
+            }
+        }
+
+        function updateMusicUI(isPlaying) {
+            if (isPlaying) {
+                iconOn.classList.remove('hidden');
+                iconOff.classList.add('hidden');
+            } else {
+                iconOn.classList.add('hidden');
+                iconOff.classList.remove('hidden');
+            }
+        }
+
+        // --- สลับการแสดงผลดรอปดาวน์ Welcome ---
+        function toggleWelcome() {
+            const content = document.getElementById('welcome-content');
+            const arrow = document.getElementById('welcome-arrow');
+            if (content.classList.contains('hidden')) {
+                content.classList.remove('hidden');
+                arrow.style.transform = 'rotate(180deg)';
+            } else {
+                content.classList.add('hidden');
+                arrow.style.transform = 'rotate(0deg)';
+            }
+        }
+
+        // --- ระบบบันทึกรูปภาพ ---
+        async function downloadQR() {
+            const imgElement = document.getElementById('qr-image');
+            if (!imgElement || !imgElement.src) {
+                showToast('ยังไม่มีรูปภาพคับ');
+                return;
+            }
+
+            try {
+                const response = await fetch(imgElement.src);
+                const blob = await response.blob();
+                const file = new File([blob], 'moririn-payment.png', { type: blob.type });
+
+                if (navigator.canShare && navigator.canShare({ files: [file] })) {
+                    await navigator.share({
+                        files: [file],
+                        title: 'Moririn Payment',
+                        text: 'สแกนชำระเงิน Moririn'
+                    });
+                    showToast('เลือก "บันทึกรูปภาพ" ได้เลยค่ะ');
+                    return;
+                }
+            } catch (err) {
+                console.log('Share error:', err);
+            }
+
+            fallbackDownload(imgElement.src);
+        }
+
+        function fallbackDownload(src) {
+            const a = document.createElement('a');
+            a.href = src;
+            a.download = 'moririn-payment.png';
+            a.target = '_blank';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            showToast('เปิดรูปภาพเรียบร้อยค่ะ');
+        }
+
+        // --- ระบบคัดลอกข้อความ ---
+        function copyText(text, containerElement, type, successMessage) {
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(text).then(() => {
+                    handleCopySuccess(containerElement, type, successMessage);
+                }).catch(err => {
+                    fallbackCopy(text, containerElement, type, successMessage);
+                });
+            } else {
+                fallbackCopy(text, containerElement, type, successMessage);
+            }
+        }
+
+        function fallbackCopy(text, containerElement, type, successMessage) {
+            const textArea = document.createElement("textarea");
+            textArea.value = text;
+            textArea.style.position = "fixed";
+            textArea.style.left = "-999999px";
+            textArea.style.top = "-999999px";
+            document.body.appendChild(textArea);
+            textArea.focus();
+            textArea.select();
+            try {
+                document.execCommand('copy');
+                handleCopySuccess(containerElement, type, successMessage);
+            } catch (err) {
+                console.error('Copy failed:', err);
+            }
+            document.body.removeChild(textArea);
+        }
+
+        function handleCopySuccess(containerElement, type, successMessage) {
+            showToast(successMessage);
+            
+            if (type === 'note') {
+                const iconContainer = containerElement.querySelector('.note-icon-status');
+                iconContainer.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="#3A3635" class="w-3.5 h-3.5"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>`;
+                setTimeout(() => {
+                    iconContainer.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>`;
+                }, 2000);
+                return;
+            }
+
+            let buttonElement;
+            if (type === 'kplus') buttonElement = containerElement.querySelector('.kplus-btn');
+            if (type === 'true') buttonElement = containerElement.querySelector('.true-btn');
+
+            if (buttonElement) {
+                const originalHtml = buttonElement.innerHTML;
+                buttonElement.innerHTML = `
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-3.5 h-3.5"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>
+                    สำเร็จ
+                `;
+                setTimeout(() => {
+                    buttonElement.innerHTML = originalHtml;
+                }, 2000);
+            }
+        }
+
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toast-text').innerText = message;
+            toast.classList.remove('opacity-0', 'translate-y-4');
+            toast.classList.add('opacity-100', 'translate-y-0');
+            
+            setTimeout(() => {
+                toast.classList.remove('opacity-100', 'translate-y-0');
+                toast.classList.add('opacity-0', 'translate-y-4');
+            }, 2500);
+        }
+    </script>
+</body>
+</html>
